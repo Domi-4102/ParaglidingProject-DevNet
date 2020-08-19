@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ParaglidingProject.SL.Core.TraineeShip.NS.TransferObjects.TraineeShipDto>
+
+@{
+    ViewData["Title"] = "Stages";
+}
+
+
+<h1>Stages</h1>
+
+<p>
+    <a asp-action="Create" class="create">Créer un nouveau stage</a>
+</p>
+<div class="nimportequoi">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <select name="filter" asp-items="@ViewData["traineeshipFilterItems"] as IEnumerable<SelectListItem>">
+            </select>
+
+            <div class="form-group">
+                <input type="submit" value="Filtrer" class="btn btn-primary add" />
+            </div>
+        </form>
+        <div class="col-md-4">
+            <form asp-action="Index">
+                <select name="search" asp-items="@ViewData["traineeshipSearchItems"] as IEnumerable<SelectListItem>">
+                </select>
+                <input type="text" name="searchInfo" />
+
+                <div class="form-group">
+                    <input type="submit" value="Search" class="btn btn-primary add" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<table class="table" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-pTraineeshipSort="@ParaglidingProject.SL.Core.TraineeShip.NS.Helpers.TraineeShipSorts.StartDate"> @Html.DisplayNameFor(model => model.TraineeShipStartDate)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-pTraineeshipSort="@ParaglidingProject.SL.Core.TraineeShip.NS.Helpers.TraineeShipSorts.EndDate"> @Html.DisplayNameFor(model => model.TraineeShipEndDate)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-pTraineeshipSort="@ParaglidingProject.SL.Core.TraineeShip.NS.Helpers.TraineeShipSorts.Price"> @Html.DisplayNameFor(model => model.TraineeShipPrice)</a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.License)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TraineeShipStartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TraineeShipEndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TraineeShipPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.License.Title)
+                </td>
+                <td>
+                    <a class="styleLink" asp-action="Edit" asp-route-id="@item.Traineeshipid">Editer</a> |
+                    <a class="styleLink" asp-action="Details" asp-route-id="@item.Traineeshipid">Détails</a> |
+                    <a class="styleLink" asp-action="Delete" asp-route-id="@item.Traineeshipid">Supprimer</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

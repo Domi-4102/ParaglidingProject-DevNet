@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ParaglidingProject.SL.Core.ParagliderModel.NS.TransfertObjects.ParagliderModelDto>
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+@{ 
+    Layout = "_Layout";
+}
+
+<h1>Modèle de parapente</h1>
+
+<p>
+    <a class="create" asp-action="Create">Créer un nouveau modèle</a>
+</p>
+<div class="nimportequoi">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <select name="filter" asp-items="@ViewData["paraglidermodelFilterItems"] as IEnumerable<SelectListItem>">
+            </select>
+            <input type="text" name="filterInfo" />
+
+            <div class="form-group">
+                <input type="submit" value="Filtrer" class="btn btn-primary add" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <select name="search" asp-items="@ViewData["paraglidermodelSearchItems"] as IEnumerable<SelectListItem>">
+            </select>
+            <input type="text" name="searchInfo" />
+
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary add" />
+            </div>
+        </form>
+    </div>
+</div>
+<table class="table" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxWeightPilot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinWeightPilot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApprovalNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApprovalDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxWeightPilot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinWeightPilot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApprovalNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApprovalDate)
+            </td>
+            <td class="last">
+                <a class="styleLink" asp-action="Edit" asp-route-id="@item.ID">Editer</a> |
+                <a class="styleLink" asp-action="Details" asp-route-id="@item.ID">Détails</a> |
+                <a class="styleLink" asp-action="Delete" asp-route-id="@item.ID">Supprimer</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

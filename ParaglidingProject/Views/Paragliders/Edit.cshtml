@@ -1,0 +1,47 @@
+﻿@model ParaglidingProject.SL.Core.Paraglider.NS.TransfertObjects.ParagliderDto
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editer les détails de @Model.Name</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ParagliderId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label><br />
+                <input asp-for="Name" class="form-control" /><br />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CommissioningDate" class="control-label"></label><br />
+                <input asp-for="CommissioningDate" class="form-control" /><br />
+                <span asp-validation-for="CommissioningDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastRevision" class="control-label"></label><br />
+                <input asp-for="LastRevision" class="form-control" /><br />
+                <span asp-validation-for="LastRevision" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParagliderModelId" class="control-label"></label><br />
+                <select asp-for="ParagliderModelId" class="form-control" asp-items="ViewBag.ParaglidersModels"></select><br />
+                <span asp-validation-for="ParagliderModelId" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <input type="submit" value="Enregistrer" class="btn btn-primary add" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a class="styleLink"  asp-action="Index">Retour à la liste</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

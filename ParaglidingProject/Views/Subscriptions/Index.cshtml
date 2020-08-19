@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ParaglidingProject.SL.Core.Subscription.NS.transferObjects.SubscriptionDto>
+
+@{
+    ViewData["Title"] = "Cotisations";
+}
+
+@{ 
+    Layout = "_Layout";
+}
+
+<h1>Historique des cotisations</h1>
+
+<p>
+    <a class="create" asp-action="Create">Créer une nouvelle année de cotisation</a>
+</p>
+<div class="nimportequoi">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <select name="filter" asp-items="@ViewData["subscriFilter"] as IEnumerable<SelectListItem>">
+            </select>
+            <input type="number" name="filterInfo" />
+
+            <div class="form-group">
+                <input type="submit" value="Filtrer" class="btn btn-primary add" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <select name="search" asp-items="@ViewData["subscriSearch"] as IEnumerable<SelectListItem>">
+            </select>
+            <input type="text" name="searchInfo" />
+
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary add" />
+            </div>
+        </form>
+    </div>
+</div>
+<table class="table" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-pSortSubscription="@ParaglidingProject.SL.Core.Subscription.NS.Helpers.SubscriptionSorts.YearDesc">@Html.DisplayNameFor(model => model.Id)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-pSortSubscription="@ParaglidingProject.SL.Core.Subscription.NS.Helpers.SubscriptionSorts.AmountAsc">@Html.DisplayNameFor(model => model.Amount)</a>
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                <a class="btn btn-primary styleLink" asp-action="Edit" asp-route-id="@item.Id">Editer</a> |
+                <a  class="btn btn-primary styleLink" asp-action="Details" asp-route-id="@item.Id">Détails</a> |
+                <a class="btn btn-primary styleLink" asp-action="Delete" asp-route-id="@item.Id">Supprimer</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

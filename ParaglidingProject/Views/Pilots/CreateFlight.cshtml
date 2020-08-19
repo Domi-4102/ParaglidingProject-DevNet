@@ -1,0 +1,53 @@
+﻿@model ParaglidingProject.Models.Flight
+
+@{
+    ViewData["Title"] = "CreateFlight";
+}
+
+<h1>Ajouter un vol à @ViewBag.FirstName @ViewBag.LastName</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateFlight">
+            <div asp-validation-summary="ModelOnly" class="text-danger validator"></div>
+            <input type="hidden" asp-for="PilotID" value="@ViewBag.PilotID" />
+            <div class="form-group">
+                <label asp-for="FlightDate" class="control-label"></label><br />
+                <input asp-for="FlightDate" class="form-control" /><br />
+                <span asp-validation-for="FlightDate" class="text-danger validator"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Duration" class="control-label"></label><br />
+                <input asp-for="Duration" class="form-control" /><br />
+                <span asp-validation-for="Duration" class="text-danger validator"></span>
+            </div>        
+            <div class="form-group">
+                <label asp-for="ParagliderID" class="control-label"></label><br />
+                <select asp-for="ParagliderID" class="form-control" asp-items="ViewBag.ParaglidingID"></select><br />
+                <span asp-validation-for="ParagliderID" class="text-danger validator"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TakeOffSiteID" class="control-label"></label><br />
+                <select asp-for="TakeOffSiteID" class="form-control" asp-items="ViewBag.SiteID"></select><br />
+                <span asp-validation-for="TakeOffSiteID" class="text-danger validator"></span>
+            </div>  
+            <div class="form-group">
+                <label asp-for="LandingSiteID" class="control-label"></label><br />
+                <select asp-for="LandingSiteID" class="form-control" asp-items="ViewBag.SiteID"></select><br />
+                <span asp-validation-for="LandingSiteID" class="text-danger validator"></span>
+            </div><br />
+            <div class="form-group">
+                <input type="submit" value="Ajouter" class="btn btn-primary add" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a class="styleLink" asp-action="Index">Retour</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,50 @@
+﻿@model ParaglidingProject.SL.Core.Subscription.NS.transferObjects.SubscriptionAndPilotsDto
+
+@{
+    ViewData["Title"] = "Details des cotisations";
+}
+
+
+<h1>Détails des cotisations pour @Model.SubscriptionDto.Id</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubscriptionDto.Amount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubscriptionDto.Amount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.pilotDtos)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table" cellspacing="0">
+                <tr>
+                    <th>Pilote Name</th>
+                    <th>Number of flights</th>
+                </tr>
+                @foreach(var item in Model.pilotDtos)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItems => item.FirstName) @Html.DisplayFor(modelItems => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modeItems => item.NumberOfFlights)
+                        </td>
+                        <td>
+                            <a class="btn btn-primary styleLink" asp-route-id="@item.PilotId" asp-action="EditPayment">Editer</a> |
+                            <a class="btn btn-primary styleLink" asp-route-id="@item.PilotId" asp-action="DeletePayment">Supprimer</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+    </dl>
+</div>
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model.YearID" class="btn btn-primary">Editer</a> |*@
+    <a asp-action="Index" class="btn btn-primary styleLink">Retour</a>
+</div>

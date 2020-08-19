@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ParaglidingProject.SL.Core.Paraglider.NS.TransfertObjects.ParagliderDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "_Layout";
+}
+
+<h1>Liste des parapentes</h1>
+
+<p>
+    <a asp-action="Create" class="create">Créer un nouveau parapente</a>
+</p>
+<div class="containertextbox">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <select name="filter" asp-items="@ViewData["paragliderFilterItems"] as IEnumerable<SelectListItem>">
+            </select>
+            <input type="text" name="paragliderfilterInfo" />
+
+            <div class="form-group">
+                <input type="submit" value="Filtrer" class="btn btn-primary add" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-4">
+
+        <form asp-action="Index">
+            <select name="search" asp-items="@ViewData["paragliderSearchItems"] as IEnumerable<SelectListItem>">
+            </select>
+            <input type="text" name="ParagliderserchInfo" />
+
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary add" />
+            </div>
+
+        </form>
+        
+    </div>
+    </div>
+<table class="table" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sort="@ParaglidingProject.SL.Core.Paraglider.NS.Helpers.ParagliderSortHelper.ParagliderSort.Name">@Html.DisplayNameFor(model => model.Name)</a>
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CommissioningDate)
+              </th>
+
+              <th>
+                <a asp-action="Index" asp-route-sort="@ParaglidingProject.SL.Core.Paraglider.NS.Helpers.ParagliderSortHelper.ParagliderSort.RevisionDate">@Html.DisplayNameFor(model => model.LastRevision)</a>
+            </th>
+
+              <th>
+               @Html.DisplayNameFor(model => model.ParagliderId)
+              </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CommissioningDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastRevision)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ParagliderId)
+                </td>
+                <td>
+                    <a class="styleLink" asp-action="Edit" asp-route-id="@item.ParagliderId">Editer</a> |
+                    <a class="styleLink" asp-action="Details" asp-route-id="@item.ParagliderId">Details</a> |
+                    <a class="styleLink" asp-action="Delete" asp-route-id="@item.ParagliderId">Supprimer</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

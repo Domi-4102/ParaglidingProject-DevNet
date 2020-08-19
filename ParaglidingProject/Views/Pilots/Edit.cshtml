@@ -1,0 +1,64 @@
+﻿@model ParaglidingProject.Models.Pilot
+
+@{
+    ViewData["Title"] = "Editer le pilote";
+}
+
+
+<h1>Editer les détails de @Model.FirstName @Model.LastName</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label">Prénom</label><br />
+                <input asp-for="FirstName" class="form-control" /><br />
+                <span asp-validation-for="FirstName" class="text-danger validator"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">Nom</label><br />
+                <input asp-for="LastName" class="form-control" /><br />
+                <span asp-validation-for="LastName" class="text-danger validator"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label">Adresse</label><br />
+                <input asp-for="Address" class="form-control" /><br />
+                <span asp-validation-for="Address" class="text-danger validator"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label">Numéro de téléphone</label><br />
+                <input asp-for="PhoneNumber" class="form-control" /><br />
+                <span asp-validation-for="PhoneNumber" class="text-danger validator"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Weight" class="control-label">Poids</label><br />
+                <input asp-for="Weight" class="form-control" /><br />
+                <span asp-validation-for="Weight" class="text-danger validator"></span>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="Role.ID" class="control-label">Fonction dans le comité</label><br />
+            <select asp-for="Role.ID" class="form-control" asp-items="ViewBag.PositionID"></select><br />
+            <span asp-validation-for="Role.ID" class="text-danger validator"></span>
+        </div>
+        <div class="form-group form-check">
+            <label asp-for="IsActive" class="form-check-label">Est actif</label><br />
+            <input class="form-check-input" asp-for="IsActive" /><br />
+            <span asp-validation-for="IsActive" class="text-danger validator"></span>
+        </div>*@<br />
+            <div class="form-group">
+                <input type="submit" value="Enregistrer" class="btn btn-primary add" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a class="styleLink" asp-action="Index">Retour</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,96 @@
+﻿@model ParaglidingProject.SL.Core.Site.NS.TransfertObjects.SiteAndFlightsDto
+
+@{
+    ViewData["Title"] = "Details du site";
+}
+
+    <h1>Details du site de @Model.SiteDto.Name</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SiteDto.SiteId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SiteDto.SiteId)
+        </dd>
+        
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SiteDto.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SiteDto.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SiteDto.Orientation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SiteDto.Orientation)
+        </dd>
+        @if (Model.SiteDto.SiteType == ParaglidingProject.SL.Core.Site.NS.TransfertObjects.TypeSite.Takeoff)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SiteDto.AltitudeTakeOff)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SiteDto.AltitudeTakeOff)
+            </dd>
+        }
+        @if (Model.SiteDto.SiteType == ParaglidingProject.SL.Core.Site.NS.TransfertObjects.TypeSite.Landing)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.SiteDto.ApproachManeuver)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SiteDto.ApproachManeuver)
+        </dd>
+        }
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SiteDto.SiteGeoCoordinate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SiteDto.SiteGeoCoordinate)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SiteDto.Level)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SiteDto.Level.ID)
+        </dd>
+        @if (Model.FlightsDto.Count > 0)
+        {
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FlightsDto)
+        </dt>
+        <dd class="col-sm-10">
+            <table class="table" cellspacing="0">
+                <tr>
+                    <th>Date du vol</th>
+                    <th>Duration</th>
+                    <th>Pilote</th>
+                </tr>
+                @foreach (var item in Model.FlightsDto)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItems => item.FlightDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItems => item.Duration)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modeItems => item.PilotName)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+        }
+    </dl>
+</div>
+<div>
+    <a class="styleLink" asp-action="Edit" asp-route-id="@Model.SiteDto.SiteId">Editer</a> |
+    <a class="styleLink" asp-action="Index">Retour</a>
+</div>

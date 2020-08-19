@@ -1,0 +1,110 @@
+﻿@model IEnumerable<ParaglidingProject.SL.Core.Flights.NS.TransfertObjects.FlightDto>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Vols</h1>
+
+<p>
+    <a asp-action="Create" class="create">Liste des vols</a>
+</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form method="POST">
+                <select id="sortListID" name="userSort" asp-items='ViewData["sortItems"] as IEnumerable<SelectListItem>'>
+                    <option value='' selected disabled>Select</option>
+                </select>
+                <select id="primaryFilterListID" name="userFilter" asp-items='ViewData["filterItems"] as IEnumerable<SelectListItem>'>
+                    <option value='' selected disabled>Select</option>
+                </select>
+                <select id="secondaryFilterListID" name="userSecondaryFilter" asp-items="@(new SelectList(string.Empty, "Value", "Text"))">
+                    <option value='' selected disabled>Select</option>
+                </select>
+                
+                <button class="styleLink" type="submit">GO AGANE</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">    
+
+    $(document).ready(function () {
+        $('#primaryFilterListID').change(function () {
+            var url = '@Url.Action("FillDropdownMenu")';
+            var ddlsource = "#primaryFilterListID";
+
+            $.getJSON(url, { selectedValue: $(ddlsource).val() }, function (dataList) {
+                var secondarySelect = $('#secondaryFilterListID');
+                secondarySelect.empty();
+
+                if (dataList != null && !jQuery.isEmptyObject(dataList)) {                   
+                    $.each(dataList, function (index, data) {
+                        secondarySelect.append(
+                            $('<option>').val(index).text(data.text))
+                    });
+                };
+            });
+        });
+    });
+</script>
+
+<table class="table" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PilotName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ParagliderName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TakeOffSiteName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LandingSiteName)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PilotName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParagliderName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TakeOffSiteName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LandingSiteName)
+            </td>
+
+            <td>
+                <a class="styleLink" asp-action="Edit" asp-route-id="@item.FlightId">Editer</a>
+                <a class="styleLink" asp-action="Details" asp-route-id="@item.FlightId">Details</a>
+                <a class="styleLink" asp-action="Delete" asp-route-id="@item.FlightId">Supprimer</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
